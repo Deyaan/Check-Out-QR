@@ -37,11 +37,17 @@ function recordExit()
   carRef.once("value", function(snapshot) {
   snapshot.forEach(function(child) {
     console.log(child.key+": "+child.val());
-    temp = parseInt(child.val());
-    carRef.child('Data').set(temp-1);
-    console.log("Car Left");
+    if (child.key == 'Data') 
+    {
+      temp = child.val();
+      temp = parseInt(temp);
+      temp = temp-1;
+      carRef.child('Data').set(temp) ;
+    }    
+    console.log("Car Entered");
   });
-  });
+
+});
 }
 
 window.onload = main();
